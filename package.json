@@ -1,5 +1,5 @@
 {
-  "name": "vibe-train",
+  "name": "vibe-trainer",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -8,13 +8,25 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/css": "^11.7.1",
+    "@prisma/client": "^3.7.0",
+    "buttplug": "^1.0.17",
+    "hash.js": "^1.1.7",
     "next": "12.0.7",
+    "prisma": "^3.7.0",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "react-modal": "^3.14.4",
+    "react-speech-recognition": "^3.9.0",
+    "react-switch": "^6.0.0",
+    "regenerator-runtime": "^0.13.9",
+    "swr": "^1.1.2"
   },
   "devDependencies": {
     "@types/node": "17.0.8",
     "@types/react": "17.0.38",
+    "@types/react-modal": "^3.13.1",
+    "@types/react-speech-recognition": "^3.9.0",
     "eslint": "8.6.0",
     "eslint-config-next": "12.0.7",
     "typescript": "4.5.4"
