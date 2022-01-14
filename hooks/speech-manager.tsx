@@ -183,10 +183,11 @@ export default ({
     if (sessionStatus === 'started' && promptInfo) {
       const newVibeLevel = Math.max(
         0,
-        vibeLevel - ((100 * (1 / promptInfo.totalNumberOfWords)))
+        vibeLevel - ((100 * (1 / promptInfo.totalNumberOfWords) * 0.3))
       )
+      setVibeLevel?.(newVibeLevel)
     }
-  }, 1000)
+  }, 300)
 
   const [resumeOnFocus, setResumeOnFocus] = useState(listening)
 
