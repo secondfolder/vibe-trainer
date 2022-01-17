@@ -99,7 +99,7 @@ export default ({
       )
       const normalisedNextTranscriptWord = escapeRegExp(nextTranscriptWord.trim()).replaceAll('\\*', '.')
       const normalisedNextPromptWord = promptWordToMatch.trim()
-      if (skipWord || normalisedNextPromptWord.match(new RegExp(normalisedNextTranscriptWord))) {
+      if (skipWord || normalisedNextPromptWord.match(new RegExp(normalisedNextTranscriptWord, 'i'))) {
         matchedPromptWords.push(promptWordToMatch)
         promptWordToMatch = ''
         transcriptWords.shift()
