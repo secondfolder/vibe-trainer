@@ -8,7 +8,7 @@ datasource db {
 }
 
 model prompts {
-  id           String    @id
+  id           String   @id
   created_at   DateTime @default(now()) @db.Timestamptz(6)
   save_count   Int      @db.SmallInt
   access_count Int

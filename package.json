@@ -6,7 +6,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "vercel-build": "prisma generate && prisma migrate deploy && npm run build"
+    "vercel-build": "prisma generate && env \"DATABASE_URL=$DATABASE_URL_MIGRATION\" prisma migrate deploy && npm run build"
   },
   "dependencies": {
     "@emotion/css": "^11.7.1",
