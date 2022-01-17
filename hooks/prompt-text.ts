@@ -1,7 +1,8 @@
-import useSWR, { Fetcher } from 'swr'
+import { Fetcher } from 'swr'
+import useSWRImmutable from 'swr/immutable'
 
 export function usePromptText(promptId?: string) {
-  const { data, error } = useSWR(promptId, fetcher)
+  const { data, error } = useSWRImmutable(promptId, fetcher)
 
   return typeof data === 'undefined' ? defaultPrompt : data
 }
@@ -13,8 +14,6 @@ const fetcher: Fetcher<string | null, string> = (promptId) => {
     .catch(() => null)
 }
 
-const defaultPrompt = `
-  I'm a good little slut.
-  I will do as I'm told.
-  I love being used.
-`
+const defaultPrompt = `I'm a good little slut.
+I will do as I'm told.
+I love being used.`
