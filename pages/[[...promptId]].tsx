@@ -22,7 +22,9 @@ const Home: NextPage = () => {
   const router = useRouter()
   const { promptId } = router.query
 
-  const defaultPrompt = usePromptText(promptId?.[0])
+  const defaultPrompt = usePromptText(
+    Array.isArray(promptId) ? promptId[0] : promptId
+  )
 
   if (!defaultPrompt) {
     window.location.assign('/')
