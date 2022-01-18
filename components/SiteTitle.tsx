@@ -3,6 +3,7 @@ import { cx, css, ClassNamesArg } from "@emotion/css";
 import ColorScale from "color-scales"
 import useDarkMode from "../hooks/dark-mode";
 import useDevicePixelRatio from "../hooks/device-pixel-ratio";
+import useTypefaceLoaded from "../hooks/typeface-loaded";
 
 type Props = {
     className?: string | ClassNamesArg
@@ -23,6 +24,7 @@ const SiteTitle = ({
 
   const darkMode = useDarkMode()
   const devicePixelRatio = useDevicePixelRatio()
+  const typefaceLoaded = useTypefaceLoaded('Lemon')
 
   function getColours() {
     const background = getComputedStyle(document.documentElement)
@@ -45,6 +47,12 @@ const SiteTitle = ({
     colours.line = newColours.line
     colours.lineScale = newColours.lineScale
   }, [darkMode])
+
+  useEffect(() => {
+    if (!requestRef.current) {
+      requestRef.current = requestAnimationFrame(drawFrame);
+    }
+  }, [typefaceLoaded])
 
   useEffect(() => {
     const canvasElm = canvasRef.current;
@@ -94,7 +102,7 @@ const SiteTitle = ({
     canvasContext.clearRect(0, 0, canvasWidth, canvasHeight);
 
 
-    // If the title is being hovered over and there's enougth of a gap between the 
+    // If the title is being hovered over and there's enough of a gap between the 
     // title and the closest line then start a new line
     const smallestLineOffset = lineOffsets.current[lineOffsets.current.length - 1]
     if (
@@ -105,7 +113,7 @@ const SiteTitle = ({
     }
 
 
-    canvasContext.font = "5rem Lemon";
+    canvasContext.font = "bold 5rem Lemon, sans-serif";
     canvasContext.textAlign = "center";
 
     const linesToDraw = lineOffsets.current.length > 0
