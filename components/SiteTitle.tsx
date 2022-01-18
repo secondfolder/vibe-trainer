@@ -4,6 +4,8 @@ import ColorScale from "color-scales"
 import useDarkMode from "../hooks/dark-mode";
 import useDevicePixelRatio from "../hooks/device-pixel-ratio";
 import useTypefaceLoaded from "../hooks/typeface-loaded";
+import { expandHex } from "../lib/colours";
+import { getCssVar } from "../lib/css";
 
 type Props = {
     className?: string | ClassNamesArg
@@ -27,14 +29,12 @@ const SiteTitle = ({
   const typefaceLoaded = useTypefaceLoaded('Lemon')
 
   function getColours() {
-    const background = getComputedStyle(document.documentElement)
-      .getPropertyValue('--colour-background').trim();
-    const line = getComputedStyle(document.documentElement)
-      .getPropertyValue('--colour-background-tone').trim();
-    const lineScale =  new ColorScale(
+    const background = getCssVar('--colour-background')
+    const line = getCssVar('--colour-background-tone')
+    const lineScale = new ColorScale(
       0,
       maxTravelDistance,
-      [line, background]
+      [expandHex(line), expandHex(background)]
     );
     return {background, line, lineScale}
   }
@@ -152,8 +152,7 @@ const SiteTitle = ({
     }
 
     // Draw actual title itself
-    canvasContext.fillStyle = getComputedStyle(document.documentElement)
-      .getPropertyValue('--colour-accent').trim()
+    canvasContext.fillStyle = getCssVar('--colour-accent')
     canvasContext.fillText("Vibe", canvasWidth / 2, line1Height);
     canvasContext.fillText("Trainer", canvasWidth / 2, line2Height);
 
