@@ -12,6 +12,7 @@
     "@emotion/css": "^11.7.1",
     "@prisma/client": "^3.7.0",
     "buttplug": "^1.0.17",
+    "color-scales": "^3.0.2",
     "hash.js": "^1.1.7",
     "next": "12.0.7",
     "prisma": "^3.7.0",

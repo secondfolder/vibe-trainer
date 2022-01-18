@@ -17,6 +17,7 @@ import { useRouter } from 'next/router';
 import { usePromptText } from '../hooks/prompt-text';
 import Button from '../components/Button';
 import EditTrainingTextDialog from '../components/EditTrainingTextDialog';
+import SiteTitle from '../components/SiteTitle';
 
 const Home: NextPage = () => {
   const router = useRouter()
@@ -60,7 +61,7 @@ const Home: NextPage = () => {
       return <Spinner className="spinner" />
     } else if (sessionStatus === 'not-started') {
       return <>
-        <h1>Vibe Trainer</h1>
+        <SiteTitle />
         <LargeButton 
           className="connectToy"
           onClick={buttplugScan}
@@ -157,12 +158,6 @@ const style = css`
     "Main Sidebar"; 
   overflow-x: hidden;
 
-  h1 {
-    font-size: 5em;
-    color: var(--colour-accent);
-    margin: 0;
-  }
-
   header {
     grid-area: Header;
 
@@ -202,10 +197,6 @@ const style = css`
     align-items: center;
     margin: 1em;
 
-    h1 {
-      font-family: Lemon;
-    }
-
     .spinner {
       div::after {
         background-color: var(--colour-accent);
@@ -220,6 +211,7 @@ const style = css`
       button.connectToy, button.beginSession {
         display: flex;
         align-items: center;
+        position: relative; /* needed so it will be placed on top of SiteTitle */
 
         &::before, &::after {
           content: " ";

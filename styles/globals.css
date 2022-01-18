@@ -5,6 +5,15 @@
   --colour-accent: #e68686;
   --colour-accent-translucent: #e6868617;
   --colour-background: #ecf5f7;
+  --colour-background-tone: #cfe7ec;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --colour-text-main: #ffffff;
+    --colour-background: #000000;
+    --colour-background-tone: #414446;
+  }
 }
 
 html,
@@ -15,13 +24,6 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   background-color: var(--colour-background);
   color: var(--colour-text-main);
-}
-
-@media (prefers-color-scheme: dark) {
-  body {
-    background: black;
-    color: white
-  }
 }
 a {
   color: inherit;
