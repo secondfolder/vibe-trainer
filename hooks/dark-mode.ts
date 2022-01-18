@@ -6,8 +6,8 @@ export default function useDarkMode() {
   )
   const [darkMode, setDarkMode] = useState(mediaQuery.matches)
 
-  function handleChange(mediaQuery: MediaQueryList, event: MediaQueryListEvent) {
-    setDarkMode(mediaQuery.matches)
+  function handleChange(this: MediaQueryList) {
+    setDarkMode(this.matches)
   }
 
   useEffect(() => {
