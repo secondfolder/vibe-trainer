@@ -1,4 +1,5 @@
 import '../styles/globals.css'
+import "@fontsource/lemon"
 import type { AppProps } from 'next/app'
 // used by react-speech-recognition
 import 'regenerator-runtime/runtime'
