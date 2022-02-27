@@ -89,7 +89,10 @@ export default function (): Return {
       })
 
       buttplugClient.addListener("deviceadded", async (newDevice: ButtplugType.ButtplugClientDevice) => {
-        buttplugClient.Devices.forEach((device) => console.log(`- ${device.Name}`));
+        // Some devices like the Lovense Lush 2 remember their previous vibration settings and will 
+        // may start vibrating as soon as they successfully connect via bluetooth. We don't want this 
+        // thus we make sure the new device is stopped.
+        await newDevice.stop()
 
         const newConnectedToys: Toy[] = []
 

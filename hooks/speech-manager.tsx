@@ -29,9 +29,9 @@ export type PromptLineType = {
   currentWordNumber: number,
 }
 
-export default ({
+export default function speechManager({
   promptText,
-}: Props) => {
+}: Props) {
   const {
     transcript,
     listening,
@@ -72,13 +72,17 @@ export default ({
 
   const [previousPromptLine, setPreviousPromptLine] = useState<PromptLineType>()
 
-  function generatePromptInfo(): PromptInfoType {
-    let matchedPromptWords: string[] = []
-    let promptWordToMatch = ''
-    let remainingPromptWords = promptSentence
+  function splitTextIntoWords(text: string): string[] {
+    return text
       .replaceAll(/[\s\n]+/g, ' ')
       .trim()
       .split(/(?=\s+)/)
+  }
+
+  function generatePromptInfo(): PromptInfoType {
+    let matchedPromptWords: string[] = []
+    let promptWordToMatch = ''
+    let remainingPromptWords = splitTextIntoWords(promptSentence)
 
     let currentWordNumber = 0
 
@@ -122,11 +126,11 @@ export default ({
       previousLine: previousPromptLine,
       numOfWordsRemaining: remainingPromptWords.length + 
         promptSentences.slice(currentSentenceIndex + 1).reduce(
-          (total, promptSentence) => total + promptSentence.split(/\s+/).length,
+          (total, promptSentence) => total + splitTextIntoWords(promptSentence).length,
           0
         ),
       totalNumOfLines: promptSentences.length,
-      totalNumberOfWords: promptText.trim().split(/\s+/).length,
+      totalNumberOfWords: splitTextIntoWords(promptText).length,
     }
     return newPromptInfo
   }
@@ -166,7 +170,7 @@ export default ({
   }, [transcript, currentSentenceIndex, wordsToSkip, sessionStatus])
   
   useEffect(() => {
-    if (promptInfo.numOfWordsRemaining !== promptInfo.totalNumberOfWords) {
+    if (promptInfo.numOfWordsRemaining !== promptInfo.totalNumberOfWords && sessionStatus === 'started') {
       const newVibeLevel = Math.min(
         vibeLevel + (
           (100 - vibeLevel) * (1 / (promptInfo.numOfWordsRemaining + 1))
@@ -177,7 +181,7 @@ export default ({
     } else {
       setVibeLevel?.(0)
     }
-  }, [promptInfo.numOfWordsRemaining])
+  }, [promptInfo.numOfWordsRemaining, sessionStatus])
 
   useInterval(() => {
     if (sessionStatus === 'started' && promptInfo) {
