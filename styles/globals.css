@@ -8,11 +8,14 @@
   --colour-background: #ecf5f7;
   --colour-background-tone: #cfe7ec;
   --colour-background-tone-translucent: #cfe7ecbe;
+  --colour-neutral: #969696;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --colour-text-main: #ffffff;
+    --colour-text-link: #65baff;
+    --colour-accent-translucent: #e6868630;
     --colour-background: #000000;
     --colour-background-tone: #414446;
     --colour-background-tone-translucent: #414446be;

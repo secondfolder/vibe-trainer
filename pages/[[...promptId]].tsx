@@ -182,6 +182,9 @@ const style = css`
 
   header {
     grid-area: Header;
+    display: flex;
+    gap: 0.7em;
+    align-items: center;
   }
 
   .sidebar {

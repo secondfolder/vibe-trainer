@@ -18,8 +18,8 @@ const style = css`
   position: relative;
   border-radius: 1em;
   overflow: hidden;    
-  background-color: #ebebeb;
-  border: 1px #d5d5d5 solid;
+  background-color: transparent;
+  border: 1px var(--colour-neutral) solid;
 
   .bar {
     background-color: var(--colour-success);

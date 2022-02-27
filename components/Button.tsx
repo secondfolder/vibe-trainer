@@ -24,6 +24,7 @@ const style = css`
   background: transparent;
   border-radius: 0.4em;
   transition: background-color 0.3s ease-in-out;
+  font-size: 1rem;
 
   &:hover {
     background-color: var(--colour-accent-translucent);

@@ -35,12 +35,12 @@ const style = css`
     position: absolute;
     left: 50%;
     top: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
     width: min(500px, 80%);
     height: max-content;
     min-height: 300px;
     max-height: 80%;
-    border: 1px solid var(--colour-text-main);
+    border: 1px solid var(--colour-neutral);
     background: var(--colour-background);
     overflow: auto;
     -webkit-overflow-scrolling: touch;

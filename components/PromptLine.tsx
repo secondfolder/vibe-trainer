@@ -28,7 +28,7 @@ export default PromptLine;
 const style = css`
   font-size: 5em;
   text-align: center;
-  color: #969696;
+  color: var(--colour-neutral);
   width: 100%;
   margin: 0;
   
