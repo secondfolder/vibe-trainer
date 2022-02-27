@@ -2,10 +2,12 @@
   --colour-success: #37a330;
   --colour-issue: #e09f0a;
   --colour-text-main: #616161;
+  --colour-text-link: #1062a5;
   --colour-accent: #e68686;
   --colour-accent-translucent: #e6868617;
   --colour-background: #ecf5f7;
   --colour-background-tone: #cfe7ec;
+  --colour-background-tone-translucent: #cfe7ecbe;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -13,6 +15,7 @@
     --colour-text-main: #ffffff;
     --colour-background: #000000;
     --colour-background-tone: #414446;
+    --colour-background-tone-translucent: #414446be;
   }
 }
 
@@ -25,9 +28,12 @@ body {
   background-color: var(--colour-background);
   color: var(--colour-text-main);
 }
-a {
-  color: inherit;
+:any-link {
+  color: var(--colour-text-link);
   text-decoration: none;
+}
+:any-link:hover {
+  text-decoration: underline;
 }
 
 * {

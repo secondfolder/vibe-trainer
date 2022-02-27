@@ -17,6 +17,7 @@ import { useRouter } from 'next/router';
 import { usePromptText } from '../hooks/prompt-text';
 import Button from '../components/Button';
 import EditTrainingTextDialog from '../components/EditTrainingTextDialog';
+import ConnectToysDialog from '../components/ConnectToysDialog';
 import SiteTitle from '../components/SiteTitle';
 
 const Home: NextPage = () => {
@@ -32,6 +33,8 @@ const Home: NextPage = () => {
   }
 
   const [editTrainingTextDialogOpen, setEditTrainingTextDialogOpen] = useState(false)
+  const [connectToysDialogOpen, setConnectToysDialogOpen] = useState(false)
+  
 
   const [vibeLevel] = useVibeLevel()
 
@@ -47,9 +50,7 @@ const Home: NextPage = () => {
   })
 
   const {
-    buttplugScan,
-    connectedDevices,
-    buttplugLoaded
+    buttplugClientStatus
   } = useToyControl()
   
   function renderContent() {
@@ -57,14 +58,14 @@ const Home: NextPage = () => {
       return <span>
         Browser doesn&apos;t support speech recognition. Please use Google Chrome.
       </span>
-    } else if (!buttplugLoaded) {
+    } else if (buttplugClientStatus === 'not loaded') {
       return <Spinner className="spinner" />
     } else if (sessionStatus === 'not-started') {
       return <>
         <SiteTitle />
         <LargeButton 
           className="connectToy"
-          onClick={buttplugScan}
+          onClick={() => setConnectToysDialogOpen(true)}
         >
           Connect Toys
         </LargeButton>
@@ -104,6 +105,11 @@ const Home: NextPage = () => {
         open={editTrainingTextDialogOpen}
         onCloseRequest={() => setEditTrainingTextDialogOpen(false)}
         promptText={defaultPrompt || ""}
+      />
+
+      <ConnectToysDialog
+        open={connectToysDialogOpen}
+        onCloseRequest={() => setConnectToysDialogOpen(false)}
       />
 
       <header>

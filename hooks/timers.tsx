@@ -16,7 +16,7 @@ export function useTimeout(
   return useTimer(callback, delay, false)
 }
 
-export function useTimer(
+function useTimer(
   callback: () => void,
   delay: number | null,
   repeat: boolean
@@ -35,7 +35,7 @@ export function useTimer(
     }
     if (delay !== null) {
       let id = repeat ? setInterval(tick, delay) : setTimeout(tick, delay);
-      return () => clearInterval(id);
+      return () => repeat ? clearInterval(id) : clearTimeout(id);
     }
   }, [delay]);
 }
