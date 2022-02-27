@@ -139,6 +139,14 @@ const Home: NextPage = () => {
             checked={useToys}
           />
         </label>}
+        {(connectedToys.length === 0 && sessionStatus === 'started') &&
+          <Button 
+            className="connectToy"
+            onClick={() => setConnectToysDialogOpen(true)}
+          >
+            Connect Toys
+          </Button>
+        }
       </header>
 
       <div className="sidebar">
