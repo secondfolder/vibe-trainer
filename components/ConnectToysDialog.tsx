@@ -4,22 +4,23 @@ import Button from './Button';
 import Dialog from './Dialog';
 import Spinner from './Spinner';
 import ToyListItem from './ToyListItem';
-import useToyControl from '../hooks/toy-control'
+import type {ButtplugClientStatus, Toy} from '../hooks/toy-control'
 
 type Props = {
   open: boolean,
   onCloseRequest: () => void,
+  buttplugScan: () => void,
+  connectedToys: Toy[],
+  buttplugClientStatus: ButtplugClientStatus,
 }
 
 const ConnectToysDialog = ({
   open,
   onCloseRequest,
+  buttplugScan,
+  connectedToys,
+  buttplugClientStatus,
 }: Props) => {
-  const {
-    buttplugScan,
-    connectedToys,
-    buttplugClientStatus,
-  } = useToyControl()
 
   function renderInitialScreen() {
     return <div className="initialScreen">

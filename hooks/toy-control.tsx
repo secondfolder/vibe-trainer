@@ -18,24 +18,31 @@ export type Toy = {
   activate: (level: number, time?: number) => Promise<void>
 }
 
-type ButtplugClientStatus = "not loaded" | "scanning" | "ready" | "error"
+export type ButtplugClientStatus = "not loaded" | "scanning" | "ready" | "error"
 
 type Return = {
   buttplugScan: () => void,
   connectedToys: Toy[],
-  buttplugClientStatus: ButtplugClientStatus
+  buttplugClientStatus: ButtplugClientStatus,
+  useToys: boolean,
+  setUseToys: (useToys: boolean) => void,
 }
 
-export default function (): Return {
-  const [vibeLevel, setVibeLevel] = useVibeLevel()
+export default function useToyControl(): Return {
+  const [vibeLevel] = useVibeLevel()
   const [connectedToys, setConnectedToys] = useState<Toy[]>([])
+  const [useToys, setUseToys] = useState(true)
   const [buttplugClient, setButtplugClient] = useState<ButtplugType.ButtplugClient>()
   const [buttplugClientStatus, setButtplugClientStatus] = useState<ButtplugClientStatus>('not loaded')
 
 
   useEffect(() => {
-    buttplugSetVibeLevel(vibeLevel/100)
-  }, [vibeLevel])
+    if (useToys) {
+      buttplugSetVibeLevel(vibeLevel/100)
+    } else {
+      buttplugSetVibeLevel(0)
+    }
+  }, [vibeLevel, useToys])
 
   useEffect(() => {
     if (document.readyState === "complete") {
@@ -172,5 +179,7 @@ export default function (): Return {
     buttplugScan,
     connectedToys,
     buttplugClientStatus,
+    useToys,
+    setUseToys
   }
 };

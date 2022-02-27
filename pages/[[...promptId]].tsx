@@ -11,7 +11,7 @@ import LargeButton from '../components/LargeButton';
 import magicWandIcon from '../assets/magic-wand.svg'
 import buttplugIcon from '../assets/buttplug.svg'
 import soundIcon from '../assets/sound.svg'
-import Switch from "react-switch";
+import Switch from "../components/Switch";
 import Spinner from '../components/Spinner';
 import { useRouter } from 'next/router';
 import { usePromptText } from '../hooks/prompt-text';
@@ -50,7 +50,11 @@ const Home: NextPage = () => {
   })
 
   const {
-    buttplugClientStatus
+    buttplugClientStatus,
+    buttplugScan,
+    connectedToys,
+    useToys,
+    setUseToys,
   } = useToyControl()
   
   function renderContent() {
@@ -110,6 +114,9 @@ const Home: NextPage = () => {
       <ConnectToysDialog
         open={connectToysDialogOpen}
         onCloseRequest={() => setConnectToysDialogOpen(false)}
+        buttplugScan={buttplugScan}
+        connectedToys={connectedToys}
+        buttplugClientStatus={buttplugClientStatus}
       />
 
       <header>
@@ -122,13 +129,14 @@ const Home: NextPage = () => {
           Mic:
           <Switch 
             onChange={setListeningStatus}
-            checked={listening} 
-            className={cx('micSwitch', listening ? 'on' : 'off')}
-            checkedIcon={<span className="icon">On</span>}
-            uncheckedIcon={<span className="icon">Off</span>}
-            height={20}
-            width={53}
-            handleDiameter={18}
+            checked={listening}
+          />
+        </label>}
+        {(connectedToys.length > 0 && (sessionStatus === 'started' || sessionStatus === 'complete')) && <label>
+          Toys:
+          <Switch 
+            onChange={setUseToys}
+            checked={useToys}
           />
         </label>}
       </header>
@@ -166,27 +174,6 @@ const style = css`
 
   header {
     grid-area: Header;
-
-    .micSwitch {
-      margin: 0 0.3em;
-      .icon {
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: var(--colour-background);
-      }
-      &.on {
-        .icon {
-          padding-left: 0.2em;
-        }
-      }
-      &.off {
-        .icon {
-          padding-right: 0.3em;
-        }
-      }
-    }
   }
 
   .sidebar {
