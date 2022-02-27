@@ -178,6 +178,13 @@ export default function speechManager({
         100
       )
       setVibeLevel?.(newVibeLevel)
+    } else if (sessionStatus === 'complete') {
+      let highestLevel = false
+      const intervalId = setInterval(() => {
+        highestLevel = !highestLevel
+        setVibeLevel?.(highestLevel ? 80 : 30)
+      }, 1000)
+      return () => clearInterval(intervalId)
     } else {
       setVibeLevel?.(0)
     }
